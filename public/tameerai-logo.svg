@@ -1,0 +1,45 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FB923C" />
+      <stop offset="100%" stopColor="#EA580C" />
+    </linearGradient>
+    <linearGradient id="logo-green" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#15803D" />
+      <stop offset="50%" stopColor="#22C55E" />
+      <stop offset="100%" stopColor="#4ADE80" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Mark (scaled & translated) -->
+  <g transform="translate(10, 10)">
+    <!-- Grid -->
+    <path d="M16 16 H64 M16 32 H64 M16 48 H64 M16 64 H64" stroke="#94A3B8" stroke-opacity="0.25" stroke-width="0.8" stroke-dasharray="2 2" />
+    <path d="M20 12 V68 M40 12 V68 M60 12 V68" stroke="#94A3B8" stroke-opacity="0.25" stroke-width="0.8" stroke-dasharray="2 2" />
+    
+    <!-- Foundation -->
+    <rect x="11.2" y="66.4" width="57.6" height="3.6" rx="1.8" fill="url(#logo-orange)" />
+
+    <!-- AI Network -->
+    <path d="M25.6 51.2 L40 38.4 L54.4 51.2 M40 20.8 L40 38.4 M25.6 51.2 L40 59.2 L54.4 51.2" stroke="url(#logo-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="40" cy="20.8" r="2.5" fill="#4ADE80" />
+    <circle cx="40" cy="38.4" r="3" fill="#22C55E" />
+    <circle cx="40" cy="59.2" r="2.2" fill="#4ADE80" />
+    <circle cx="25.6" cy="51.2" r="2.4" fill="#22C55E" />
+    <circle cx="54.4" cy="51.2" r="2.4" fill="#22C55E" />
+
+    <!-- Beams -->
+    <path d="M40 12.8 L52 22.4 V66.4 H45.6 V26.4 L40 21.6 L34.4 26.4 V66.4 H28 V22.4 L40 12.8 Z" fill="url(#logo-orange)" />
+    <path d="M20.8 32 L28 27.2 V66.4 H20.8 V32 Z" fill="url(#logo-orange)" />
+    <path d="M59.2 32 L52 27.2 V66.4 H59.2 V32 Z" fill="url(#logo-orange)" />
+    <polygon points="40,8.8 43.2,12.8 40,16.8 36.8,12.8" fill="#22C55E" />
+  </g>
+
+  <!-- Typography -->
+  <text x="105" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="44" font-weight="800" fill="#0F172A" letter-spacing="-0.03em">Tameer</text>
+  <text x="272" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="44" font-weight="900" fill="#F97316" letter-spacing="-0.03em">AI</text>
+  <circle cx="330" cy="52" r="4.5" fill="#22C55E" />
+
+  <!-- Tagline -->
+  <text x="106" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.18em">CONSTRUCTION INTELLIGENCE</text>
+</svg>
