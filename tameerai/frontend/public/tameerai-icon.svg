@@ -1,0 +1,33 @@
+<svg width="256" height="256" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tameer-beam-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FB923C" />
+      <stop offset="100%" stopColor="#EA580C" />
+    </linearGradient>
+    <linearGradient id="tameer-steel-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#22C55E" />
+      <stop offset="100%" stopColor="#15803D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Blueprint Technical Gridlines -->
+  <path d="M18 20 H82 M18 40 H82 M18 60 H82 M18 80 H82" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="0.75" stroke-dasharray="2 3" />
+  <path d="M24 16 V84 M50 16 V84 M76 16 V84" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="0.75" stroke-dasharray="2 3" />
+
+  <!-- Heavy Structural Foundation Beam -->
+  <rect x="12" y="80" width="76" height="6" rx="2" fill="url(#tameer-beam-orange)" />
+
+  <!-- Structural Steel Cross-Bracing -->
+  <path d="M28 44 L72 76 M72 44 L28 76" stroke="url(#tameer-steel-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Twin Structural Columns -->
+  <rect x="20" y="36" width="11" height="44" rx="2" fill="url(#tameer-beam-orange)" />
+  <rect x="69" y="36" width="11" height="44" rx="2" fill="url(#tameer-beam-orange)" />
+
+  <!-- Central Architectural Spire -->
+  <path d="M50 16 L63 28 V80 H55 V33 L50 27 L45 33 V80 H37 V28 L50 16 Z" fill="#EA580C" />
+
+  <!-- Keystone Apex Diamond -->
+  <polygon points="50,8 57,16 50,24 43,16" fill="#16A34A" />
+  <circle cx="50" cy="16" r="2" fill="#FFFFFF" />
+</svg>

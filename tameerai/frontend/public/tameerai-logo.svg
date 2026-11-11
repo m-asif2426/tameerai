@@ -1,0 +1,44 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-beam-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FB923C" />
+      <stop offset="100%" stopColor="#EA580C" />
+    </linearGradient>
+    <linearGradient id="logo-steel-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#22C55E" />
+      <stop offset="100%" stopColor="#15803D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Mark (Geometric Architectural Truss) -->
+  <g transform="translate(10, 10)">
+    <!-- Blueprint Drafting Grid -->
+    <path d="M14 16 H66 M14 32 H66 M14 48 H66 M14 64 H66" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="0.75" stroke-dasharray="2 2" />
+    <path d="M19 12 V68 M40 12 V68 M61 12 V68" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="0.75" stroke-dasharray="2 2" />
+
+    <!-- Heavy Structural Foundation Beam -->
+    <rect x="9.6" y="64" width="60.8" height="4.8" rx="1.6" fill="url(#logo-beam-orange)" />
+
+    <!-- Structural Steel Cross-Bracing -->
+    <path d="M22.4 35.2 L57.6 60.8 M57.6 35.2 L22.4 60.8" stroke="url(#logo-steel-emerald)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Twin Structural Columns -->
+    <rect x="16" y="28.8" width="8.8" height="35.2" rx="1.6" fill="url(#logo-beam-orange)" />
+    <rect x="55.2" y="28.8" width="8.8" height="35.2" rx="1.6" fill="url(#logo-beam-orange)" />
+
+    <!-- Central Spire & Cantilever -->
+    <path d="M40 12.8 L50.4 22.4 V64 H44 V26.4 L40 21.6 L36 26.4 V64 H29.6 V22.4 L40 12.8 Z" fill="#EA580C" />
+
+    <!-- Keystone Apex Diamond -->
+    <polygon points="40,6.4 45.6,12.8 40,19.2 34.4,12.8" fill="#16A34A" />
+    <circle cx="40" cy="12.8" r="1.6" fill="#FFFFFF" />
+  </g>
+
+  <!-- Typography -->
+  <text x="105" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="44" font-weight="800" fill="#0F172A" letter-spacing="-0.03em">Tameer</text>
+  <text x="272" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="44" font-weight="900" fill="#F97316" letter-spacing="-0.03em">AI</text>
+  <circle cx="330" cy="52" r="4.5" fill="#22C55E" />
+
+  <!-- Tagline -->
+  <text x="106" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.18em">CONSTRUCTION INTELLIGENCE</text>
+</svg>

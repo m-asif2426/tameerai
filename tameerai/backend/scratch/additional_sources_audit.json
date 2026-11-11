@@ -1,0 +1,86 @@
+[
+  {
+    "name": "AtaPata Pulse",
+    "url": "https://atapata.com/",
+    "category": "SECONDARY_MARKET_PUBLISHER",
+    "status": null,
+    "length": 0,
+    "tables": 0,
+    "has_date": false,
+    "date_info": null,
+    "error": "ConnectError: [Errno 11001] getaddrinfo failed",
+    "snippet": ""
+  },
+  {
+    "name": "AtaPata Saria Rate",
+    "url": "https://atapata.com/saria-rate-in-pakistan-today/",
+    "category": "SECONDARY_MARKET_PUBLISHER",
+    "status": null,
+    "length": 0,
+    "tables": 0,
+    "has_date": false,
+    "date_info": null,
+    "error": "ConnectError: [Errno 11001] getaddrinfo failed",
+    "snippet": ""
+  },
+  {
+    "name": "Royal Steel",
+    "url": "https://royalsteel.com.pk/",
+    "category": "MANUFACTURER_EX_FACTORY",
+    "status": 200,
+    "length": 23623,
+    "tables": 1,
+    "has_date": false,
+    "date_info": null,
+    "error": null,
+    "snippet": "Home - Royal Steel --> +92-331-6000084 +92-334-1377772 sales@royalsteel.com.pk"
+  },
+  {
+    "name": "Royal Rebar",
+    "url": "https://royalrebar.com/",
+    "category": "MANUFACTURER_EX_FACTORY",
+    "status": 200,
+    "length": 165512,
+    "tables": 0,
+    "has_date": false,
+    "date_info": null,
+    "error": null,
+    "snippet": "RoyalRebar <link rel=\"apple-touch-icon\" sizes=\"180x"
+  },
+  {
+    "name": "Kamran Steel",
+    "url": "https://kamransteel.com/",
+    "category": "MANUFACTURER_EX_FACTORY",
+    "status": 200,
+    "length": 217915,
+    "tables": 1,
+    "has_date": true,
+    "date_info": "2026-09-23T19:21:20+00:00",
+    "error": null,
+    "snippet": "@font-face {font-family:Flaticon-arrows;src:url(\"//kamransteel.com/wp-content/themes/constrau/assets/libs/flaticon/arrows/./Flaticon.woff\") format(\"wo"
+  },
+  {
+    "name": "Ittehad Steel",
+    "url": "https://ittehadsteel.com/",
+    "category": "MANUFACTURER_EX_FACTORY",
+    "status": 200,
+    "length": 114,
+    "tables": 0,
+    "has_date": false,
+    "date_info": null,
+    "error": null,
+    "snippet": "window.onload=function(){window.location.href=\"/lander\"}"
+  },
+  {
+    "name": "Pakistan Steel Mills",
+    "url": "https://paksteel.gov.pk/",
+    "category": "MANUFACTURER_EX_FACTORY",
+    "status": null,
+    "length": 0,
+    "tables": 0,
+    "has_date": false,
+    "date_info": null,
+    "error": "ConnectError: [Errno 11001] getaddrinfo failed",
+    "snippet": ""
+  }
+]

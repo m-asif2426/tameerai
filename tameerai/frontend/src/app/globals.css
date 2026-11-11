@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+    --primary: 249 115 22;
+    --primary-foreground: 255 255 255;
+    --secondary: 22 163 74;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --border: 226 232 240;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --accent: 255 247 237;
+    --accent-foreground: 194 65 12;
+    --ring: 249 115 22;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --primary: 249 115 22;
+    --primary-foreground: 255 255 255;
+    --secondary: 22 163 74;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --border: 51 65 85;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+    --accent: 124 45 18;
+    --accent-foreground: 253 186 116;
+    --ring: 249 115 22;
+  }
+
+  * {
+    @apply border-slate-200 dark:border-slate-700;
+  }
+
+  body {
+    @apply bg-white dark:bg-navy-900 text-navy-900 dark:text-slate-50;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html[dir="rtl"] {
+    font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", "Segoe UI", sans-serif;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+           bg-orange-500 hover:bg-orange-600 
+           text-white font-semibold text-sm rounded-xl
+           transition-all duration-200 shadow-sm hover:shadow-md
+           focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+           bg-transparent border border-slate-300 dark:border-slate-600
+           text-navy-800 dark:text-slate-200 font-semibold text-sm rounded-xl
+           hover:bg-slate-50 dark:hover:bg-slate-800
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white dark:bg-navy-800 rounded-2xl border border-slate-100 dark:border-slate-700
+           shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .badge-orange {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 
+           bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 
+           text-xs font-medium rounded-full;
+  }
+
+  .badge-green {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 
+           bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 
+           text-xs font-medium rounded-full;
+  }
+
+  .badge-red {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 
+           bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 
+           text-xs font-medium rounded-full;
+  }
+
+  .badge-yellow {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 
+           bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 
+           text-xs font-medium rounded-full;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl font-bold text-navy-900 dark:text-white;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-slate-600 dark:text-slate-300
+           hover:text-orange-500 dark:hover:text-orange-400
+           transition-colors duration-200;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           text-slate-600 dark:text-slate-400
+           hover:bg-slate-100 dark:hover:bg-slate-800
+           hover:text-navy-900 dark:hover:text-white
+           transition-all duration-200;
+  }
+
+  .sidebar-link-active {
+    @apply bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400
+           hover:bg-orange-50 dark:hover:bg-orange-900/20;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass {
+    @apply bg-white/80 dark:bg-navy-900/80 backdrop-blur-md;
+  }
+
+  .gradient-orange {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* Smooth transitions */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Override for animations that shouldn't be slowed */
+.animate-float, .animate-pulse, .animate-spin {
+  transition: none;
+}

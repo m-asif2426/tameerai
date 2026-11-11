@@ -1,0 +1,67 @@
+# ==========================================
+# Root .gitignore for TameerAI Full-Stack Monorepo
+# ==========================================
+
+# Virtual Environments
+venv/
+env/
+.venv/
+**/venv/
+**/env/
+**/.venv/
+
+# Node.js Dependencies & Next.js Builds
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+build/
+**/build/
+dist/
+**/dist/
+
+# Python Cache & Testing
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+
+# Local Environment & Secrets (NEVER COMMIT SECRETS)
+.env
+**/.env
+.env*.local
+**/.env*.local
+*.pem
+*.key
+
+# Database Server Local Binaries & Cluster (Do not commit binary database clusters)
+pgdata*/
+**/pgdata*/
+pgsql/
+**/pgsql/
+*.zip
+**/*.zip
+*.log
+**/*.log
+
+# Test Artifacts & Reports
+test-results/
+**/test-results/
+playwright-report/
+**/playwright-report/
+playwright-report.json
+**/playwright-report.json
+.last-run.json
+**/.last-run.json
+*.tsbuildinfo
+
+# Git backup
+.git_backup/
+**/.git_backup/
+
+# OS metadata
+.DS_Store
+Thumbs.db

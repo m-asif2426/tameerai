@@ -1,0 +1,552 @@
+<USER_REQUEST>
+# TAMEERAI — PHASE 03.1
+## MASTER IMPLEMENTATION PROMPT
+### Material Rate Intelligence Bridge & Provenance Integration
+
+**ROLE:** Act as a Senior Python Backend Architect, Civil Engineering Domain Specialist, PostgreSQL Engineer, AI Integration Engineer, and Application Security Auditor.
+
+**PROJECT:** TameerAI — Pakistan Construction Intelligence Platform.
+
+**OBJECTIVE:** Implement Phase 03.1 by integrating the existing Phase 02 Material Rate Intelligence System with the existing Phase 03 Construction AI Chat Workflow through a secure, evidence-grounded Material Rate Intelligence Bridge.
+
+---
+
+# 1. MANDATORY PRE-IMPLEMENTATION INSTRUCTIONS
+
+Before changing any code:
+
+1. Inspect the complete existing backend architecture.
+2. Inspect the current AI workflow, intent classification, entity extraction, context engine, material rate models, canonical pricing services, and database repositories.
+3. Identify all existing reusable implementations.
+4. Do not recreate existing functionality.
+5. Do not duplicate canonical pricing calculations.
+6. Prepare a concise implementation map identifying the exact files that need modification or creation.
+7. Verify the actual local PostgreSQL database identity, Alembic revision, schema, and observation counts.
+8. Record the existing test baseline before modifications.
+
+**Important existing architecture:**
+
+- AI Provider Abstraction: Already implemented.
+- Gemini Provider: Already implemented.
+- Construction Domain Guard: Already implemented.
+- Construction Intent Classification: Already implemented.
+- Entity Extraction: Already implemented.
+- Context Management: Already implemented.
+- Scoped RAG Retrieval: Already implemented.
+- Grounded Citation Validation: Already implemented.
+- Construction Chat Workflow: Already implemented.
+- Phase 02 Material Rate Collection System: Already implemented.
+
+Build only the missing integration layer.
+
+# 2. STRICT ENVIRONMENT AND SECURITY BOUNDARIES
+
+Development must use the isolated local PostgreSQL 17 environment.
+
+Expected environment:
+- PostgreSQL: Local isolated PostgreSQL 17.
+- Port: 5433.
+- Database: tameerai_isolated_test.
+- Latest previously reported local migration: 008_material_rate_published_at_nullable.
+- Hosted Supabase: Must remain at revision 005_background_jobs_infrastructure.
+
+Before execution, verify these values physically rather than assuming they remain unchanged.
+
+Mandatory feature flags:
+
+```python
+ENABLE_MATERIAL_RATE_COLLECTION = False
+ENABLE_GEMINI_API = False
+ENABLE_AI_FEATURES = False
+```
+
+Do not enable these flags.
+
+PROHIBITED OPERATIONS:
+
+- No hosted Supabase migrations.
+- No hosted database writes.
+- No live Gemini API calls.
+- No external market scraping.
+- No frontend modifications.
+- No regulatory PDF directory access.
+- No storage uploads or deletions.
+- No automatic paid API activation.
+- No unnecessary Alembic migrations.
+
+If a schema modification appears necessary, stop and explain why before creating or applying a migration.
+
+# 3. TASK A — MATERIAL RATE INTELLIGENCE BRIDGE
+
+Create:
+
+`backend/app/services/material_rates/ai_bridge.py`
+
+Implement a dedicated service responsible for translating construction material inquiries into evidence-backed market-rate responses.
+
+The bridge must:
+
+1. Accept normalized construction queries.
+2. Identify requested material, product specification, grade, city, locality, unit, and price basis.
+3. Query existing canonical material-rate services.
+4. Retrieve eligible source observations.
+5. Apply source credibility and freshness policies.
+6. Preserve provenance and attribution.
+7. Return structured evidence to ConstructionChatWorkflow.
+8. Return an honest unavailable response when sufficient evidence does not exist.
+
+Do not let the language model independently calculate or invent market prices.
+
+# 4. TASK B — STRICT TRUSTED-OBSERVATION ELIGIBILITY
+
+Previously audited local observations:
+
+- 188 PBS monthly statistical observations.
+- 45 SteelRateToday market observations.
+- 33 synthetic integration-test observations.
+
+The 33 synthetic observations must never appear in user-facing market-rate responses.
+
+Implement explicit database-level eligibility criteria.
+
+Required checks:
+
+1. Source reliability tier.
+2. Source permission status.
+3. Source active status.
+4. Observation verification status.
+5. Product identity.
+6. City and locality.
+7. Grade and specification.
+8. Comparable price basis.
+9. Observation freshness.
+10. Dealer quotation verification, where applicable.
+
+Permitted source tiers:
+
+- authoritative
+- indicative
+
+Permitted observation statuses:
+
+- verified_market_range
+- verified_quote
+- cross_checked
+- indicative
+
+Exclude:
+
+- synthetic observations
+- unverified observations
+- conflicted observations
+- inactive sources
+- unpermitted sources
+- expired dealer quotations
+- invalid or unsupported prices
+
+**Critical freshness correction:**
+
+Never treat `published_at IS NULL` as proof that an observation is fresh.
+
+Use a documented, source-specific date policy:
+
+- Prefer actual publication date.
+- Where appropriate, use a trustworthy observation or collection timestamp.
+- Respect each source's configured `freshness_ttl_days`.
+- If no reliable timestamp exists, exclude the observation from current-rate claims.
+
+Do not invent missing timestamps.
+
+Never use fragile source-name string matching such as:
+
+```sql
+WHERE source_code NOT LIKE '%_TEST'
+```
+
+Use explicit source trust, permission, verification, and provenance fields.
+
+Use parameterized SQL or SQLAlchemy ORM queries.
+
+# 5. TASK C — REUSE CANONICAL MARKET RATE ENGINE
+
+This task is mandatory.
+
+Inspect and reuse the existing Phase 02 canonical market-rate calculation and verification engine.
+
+Previously documented scoring factors:
+
+| Factor | Weight |
+|---|---:|
+| Source credibility | 0.35 |
+| Verification quality | 0.30 |
+| Freshness | 0.25 |
+| Sample volume | 0.10 |
+
+Verify these weights against the actual implementation before reuse.
+
+Do not silently create a second pricing formula.
+
+The bridge must not simply select the newest observation and label it the market rate.
+
+It must distinguish:
+
+- Individual dealer quotation.
+- Statistical market range.
+- Indicative wholesale price.
+- Canonical market snapshot.
+- Cross-checked market rate.
+
+If existing canonical snapshot generation does not cover the genuine PBS and SteelRateToday observations, identify and implement the missing integration using existing services.
+
+Do not fabricate canonical snapshots.
+
+# 6. TASK D — MATERIAL AND LOCATION MATCHING
+
+Support all configured construction material categories:
+
+- Cement
+- Steel / Saria
+- Bricks
+- Sand
+- Crush / Aggregate
+- Blocks
+- Tiles
+- Other construction materials
+
+Support Pakistani cities and existing locality normalization.
+
+Examples:
+
+- Lahore
+- Lahore Cantt
+- Karachi
+- Karachi South
+- Karachi East
+- Islamabad
+- Rawalpindi
+- Faisalabad
+- Multan
+- Peshawar
+- Quetta
+- Gujranwala
+- Sialkot
+
+Preserve sub-city locality information.
+
+Do not silently substitute a citywide average for a specific locality without clearly identifying the difference.
+
+Maintain compatibility with existing canonical units:
+
+- Cement: 50 kg bag.
+- Steel: Metric ton.
+- Bricks: 1,000 bricks.
+- Sand: CFT.
+- Crush: CFT.
+- Tiles: Square foot.
+
+Use Decimal for all financial calculations.
+
+Do not use floating-point arithmetic for financial prices.
+
+# 7. TASK E — INTELLIGENT CHAT WORKFLOW INTEGRATION
+
+Integrate the new bridge into the existing:
+
+`app/ai/workflow/construction_chat.py`
+
+Use the existing intent classifier.
+
+Material-rate questions should route through the material-rate bridge rather than being treated as ordinary general construction questions.
+
+Examples:
+
+English:
+- What is today's cement rate in Lahore?
+- What is the current steel price in Karachi?
+- Compare cement rates in Lahore and Islamabad.
+
+Roman Urdu:
+- Lahore mein cement ka rate kya hai?
+- Aaj saria kitne ka mil raha hai?
+- 1000 eenton ki qeemat kitni hai?
+- Karachi aur Lahore mein cement ke rates compare karo.
+
+Urdu:
+- لاہور میں سیمنٹ کا آج کا ریٹ کیا ہے؟
+- کراچی میں سریے کی قیمت کتنی ہے؟
+
+Multi-turn context:
+
+Turn 1: Saria ka rate batao.
+
+Turn 2: Lahore mein.
+
+The context engine must retain the material and resolve the city from the follow-up.
+
+If grade, specification, location, or price basis is essential but missing, request clarification where necessary.
+
+Do not unnecessarily ask for information already available in conversation history.
+
+# 8. TASK F — EVIDENCE-GROUNDED AI RESPONSE
+
+Create a structured response contract for material-rate evidence.
+
+Each returned price must preserve:
+
+- Canonical material name.
+- Brand, if available.
+- Grade and specification, if available.
+- City.
+- Locality, if available.
+- Price in PKR.
+- Unit.
+- Price basis.
+- Source name.
+- Publication date or observation date.
+- Verification status.
+- Freshness information.
+- Provenance reference.
+
+Example response:
+
+"Current available cement market information for Lahore:
+
+Material: Cement
+Unit: 50 kg bag
+Price: PKR [database-derived value]
+Source: [actual source]
+Date: [actual publication/observation date]
+Status: [actual verification status]
+
+Note: This rate represents the stated source and price basis. Actual dealer prices may vary according to location, transportation, brand and quantity."
+
+This is a response template only. Never hardcode illustrative prices.
+
+## Mandatory Source Distinctions
+
+PBS:
+Present as official statistical market information.
+
+SteelRateToday:
+Present as indicative secondary-market information unless independently cross-verified.
+
+Verified Dealer Quotes:
+Present as verified dealer quotations only after successful verification.
+
+Never describe an indicative price as an officially verified market rate.
+
+## Unavailability Policy
+
+When no eligible evidence exists:
+
+"Verified market rates for [Material] in [City] are currently unavailable in the verified national database."
+
+Offer clarification or a suitable alternative benchmark only when comparable evidence exists.
+
+Never manufacture prices to make an answer appear complete.
+
+# 9. TASK G — GROUNDED VALIDATION AND PROMPT SECURITY
+
+Extend existing grounded validation where necessary.
+
+Requirements:
+
+1. The model cannot invent numerical market prices.
+2. Every quoted rate must reference actual bridge evidence.
+3. Source attribution must remain intact.
+4. Retrieved source content must be treated as untrusted data.
+5. Prompt injection inside retrieved records must never become executable instructions.
+6. Cross-project data must never leak into material-rate responses.
+7. No unauthorized project documents or dealer quotations may be exposed.
+8. Unsupported prices must be rejected by post-generation validation.
+
+Reuse existing citation and evidence-validation services.
+
+Do not duplicate validation logic.
+
+# 10. TASK H — AUTOMATED TESTING
+
+Create:
+
+`backend/tests/test_material_rate_ai_bridge.py`
+
+Add dedicated tests covering the following groups.
+
+### Group A — Trusted Observation Filtering
+
+- PBS verified observation accepted.
+- Indicative SteelRateToday observation correctly labelled.
+- Synthetic records rejected.
+- Unverified records rejected.
+- Inactive sources rejected.
+- Unpermitted sources rejected.
+- Missing reliable timestamps excluded from current-rate claims.
+- Expired dealer quotations rejected.
+
+### Group B — Canonical Pricing
+
+- Existing canonical engine reused.
+- Source credibility preserved.
+- Verification weighting preserved.
+- Freshness weighting preserved.
+- Sample volume considered.
+- No unsupported canonical snapshots generated.
+- Different price bases are never incorrectly combined.
+
+### Group C — Product and Location Matching
+
+- Cement matching.
+- Steel grade matching.
+- Brick unit conversion.
+- Sand and crush unit matching.
+- City normalization.
+- Sub-city locality preservation.
+- Brand and specification differentiation.
+
+### Group D — Chat Integration
+
+- English material-rate query.
+- Roman Urdu material-rate query.
+- Urdu material-rate query.
+- Multi-turn city resolution.
+- Missing-variable clarification.
+- Mixed-topic query isolation.
+- Ordinary construction queries unaffected.
+
+### Group E — Grounded Responses
+
+- Correct source attribution.
+- Correct date attribution.
+- Correct verification status.
+- Unsupported price rejection.
+- No-data fallback.
+- Prompt-injection rejection.
+- No fabricated market rates.
+
+### Group F — Security and Isolation
+
+- Project authorization preserved.
+- Foreign project evidence rejected.
+- Synthetic observations never exposed.
+- No external Gemini calls.
+- No hosted database writes.
+
+# 11. TASK I — POSTGRESQL 17 INTEGRATION VERIFICATION
+
+Execute integration tests against the isolated PostgreSQL 17 database.
+
+Verify:
+
+- Genuine eligible observations can be retrieved.
+- Synthetic observations are excluded.
+- Canonical pricing integration works.
+- Decimal precision is maintained.
+- Provenance is preserved.
+- Existing immutable observation triggers remain intact.
+- Existing foreign keys and database constraints remain intact.
+- Existing material-rate API endpoints remain backward compatible.
+
+Use isolated test transactions and clean up test fixtures safely.
+
+Never update or delete historical immutable observations.
+
+# 12. TASK J — REGRESSION TESTING
+
+Run:
+
+1. Dedicated Material Rate AI Bridge tests.
+2. Existing Material Rate adapter tests.
+3. Existing Material Rate collection and security tests.
+4. Existing AI workflow tests.
+5. Construction intent and context tests.
+6. Grounded evidence validation tests.
+7. Full backend regression suite.
+
+Compare the results against the pre-implementation baseline.
+
+Investigate every regression.
+
+Do not claim success if tests have been skipped, failed, or not executed.
+
+# 13. IMPLEMENTATION ORDER
+
+Follow this order:
+
+Stage 03.1-A: Existing codebase inspection and baseline.
+
+Stage 03.1-B: Trusted observation repository/query.
+
+Stage 03.1-C: Canonical market rate engine integration.
+
+Stage 03.1-D: MaterialRateIntelligenceBridge implementation.
+
+Stage 03.1-E: ConstructionChatWorkflow integration.
+
+Stage 03.1-F: Evidence-grounded response formatting.
+
+Stage 03.1-G: Security and provenance validation.
+
+Stage 03.1-H: PostgreSQL 17 integration testing.
+
+Stage 03.1-I: Full regression and final audit.
+
+Do not skip stages.
+
+# 14. REQUIRED FINAL IMPLEMENTATION REPORT
+
+At completion, provide:
+
+1. Executive summary.
+2. Exact files created.
+3. Exact files modified.
+4. Architecture and data flow.
+5. Trusted observation eligibility implementation.
+6. Canonical engine reuse evidence.
+7. Genuine source observation counts.
+8. Synthetic record exclusion evidence.
+9. Material and locality matching results.
+10. English, Roman Urdu and Urdu test results.
+11. PostgreSQL 17 integration results.
+12. Dedicated test results.
+13. Full regression results.
+14. Security audit.
+15. Database migration status.
+16. Hosted Supabase integrity.
+17. Frontend integrity.
+18. Protected PDF directory integrity.
+19. Remaining limitations.
+20. Final verdict.
+
+Clearly distinguish implemented, tested, and merely documented functionality.
+
+# 15. MANDATORY STOP CONDITION
+
+When Phase 03.1 is complete:
+
+STOP ALL EXECUTION.
+
+Do not automatically begin Phase 03.2.
+
+Present the complete implementation report and wait for explicit user approval.
+
+---
+
+**FINAL PROJECT PRINCIPLE**
+
+TameerAI must never sacrifice engineering accuracy for conversational convenience.
+
+Every construction material price must originate from eligible database evidence, pass the established canonical pricing and verification policies, preserve its source provenance, and be presented with an honest confidence and freshness status.
+
+No fabricated prices. No synthetic data leakage. No duplicate architecture. No unauthorized production changes.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-07T16:29:41+05:00.
+
+The user's current state is as follows:
+Other open documents:
+- d:\new idea project\tameerai\backend\scratch\phase02h1\reconciliation_task_a.py (LANGUAGE_UNSPECIFIED)
+- d:\new idea project\tameerai\backend\scratch\phase02h1\audit_observations.py (LANGUAGE_UNSPECIFIED)
+- d:\new idea project\tameerai\backend\scratch\phase02h1\audit_task_b.py (LANGUAGE_UNSPECIFIED)
+- d:\new idea project\tameerai\backend\scratch\audit_pbs_workbook.py (LANGUAGE_UNSPECIFIED)
+- d:\new idea project\tameerai\backend\scratch\inspect_pg17_data.py (LANGUAGE_UNSPECIFIED)
+</ADDITIONAL_METADATA>

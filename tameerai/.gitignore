@@ -1,0 +1,23 @@
+# Root .gitignore for TameerAI
+.env
+.env.*
+*.env
+*.pem
+*.key
+credentials*.json
+service_account*.json
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Cache & Build
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.next/
+node_modules/
+dist/
+build/
+

@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-11-04T17:12:03.484725+00:00",
+  "project_ref": "ttcykmdfzlmtsvxdupkq",
+  "alembic_revision": "005_background_jobs_infrastructure",
+  "status": "STAGE_B3_CLEANUP_SUCCESSFULLY_COMMITTED",
+  "pre_cleanup_counts": {
+    "background_jobs": 4,
+    "boq_analyses": 0,
+    "boq_items": 0,
+    "chat_messages": 0,
+    "chat_sessions": 0,
+    "compliance_audits": 0,
+    "compliance_findings": 0,
+    "contract_analyses": 0,
+    "contract_risk_cards": 0,
+    "document_chunks": 0,
+    "documents": 0,
+    "knowledge_sources": 0,
+    "material_rates": 0,
+    "project_activities": 1,
+    "project_members": 0,
+    "projects": 1,
+    "reports": 0,
+    "user_sessions": 3,
+    "user_settings": 2,
+    "users": 2
+  },
+  "affected_rows_per_table": {
+    "background_jobs": 4,
+    "project_activities": 1,
+    "projects": 1,
+    "user_sessions": 3,
+    "user_settings": 2,
+    "users": 2
+  },
+  "total_rows_deleted": 13,
+  "post_cleanup_counts": {
+    "background_jobs": 0,
+    "boq_analyses": 0,
+    "boq_items": 0,
+    "chat_messages": 0,
+    "chat_sessions": 0,
+    "compliance_audits": 0,
+    "compliance_findings": 0,
+    "contract_analyses": 0,
+    "contract_risk_cards": 0,
+    "document_chunks": 0,
+    "documents": 0,
+    "knowledge_sources": 0,
+    "material_rates": 0,
+    "project_activities": 0,
+    "project_members": 0,
+    "projects": 0,
+    "reports": 0,
+    "user_sessions": 0,
+    "user_settings": 0,
+    "users": 0
+  },
+  "transaction_status": "COMMITTED",
+  "authorized_records_deleted": {
+    "jobs": [
+      "818e72a5-305a-44b3-b24c-96eb5686d812",
+      "350c6dcb-e625-47f3-a843-c15b1ec35edf",
+      "fd8d768a-a234-41c1-889e-799d9c0b93a6",
+      "8c3bea49-eb9a-431e-b523-e76d736b9f62"
+    ],
+    "project_activity": "458719ac-9995-4633-aacf-ef34e43e62af",
+    "project": "d3d1baa6-e62d-4224-be33-48eda522c766",
+    "sessions": [
+      "b4f5c09f-093f-4251-8d5b-28a701a836a5",
+      "45d3177c-1510-4dc1-aa17-a8edf7bdbf42",
+      "24dd3832-0e22-4124-af0d-1bebb3a7ab1c"
+    ],
+    "settings": [
+      "a5b15ceb-e671-4f52-a0c0-1d895b9e8f48",
+      "2586881b-206c-40c7-b00d-3a4603369fff"
+    ],
+    "users": [
+      {
+        "id": "0c742c0b-6c2e-499f-9c19-819e86c6b337",
+        "email": "smoke_owner@tameerai.pk"
+      },
+      {
+        "id": "8f06e0cd-3a06-4c89-988e-d3863b302fa9",
+        "email": "smoke_stranger@tameerai.pk"
+      }
+    ]
+  },
+  "verification_result": "ALL_20_APPLICATION_TABLES_ZERO_ROWS_CLEAN_BASELINE"
+}
